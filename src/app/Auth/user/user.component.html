@@ -1,0 +1,91 @@
+<body>
+  <div class="container">
+    <div class="leftbox">
+      <nav>
+        <a (click)="setTab(0)" class="tab" [class.active]="activeTab === 0">
+          <i class="bi bi-person-circle"></i>
+        </a>
+        <a (click)="setTab(1)" class="tab" [class.active]="activeTab === 1">
+          <i class="bi bi-cart-fill"></i>
+        </a>
+        <a (click)="setTab(2)" class="tab" [class.active]="activeTab === 2">
+          <i class="bi bi-bookmarks-fill"></i>
+        </a>
+        <a (click)="setTab(3)" class="tab" [class.active]="activeTab === 3">
+          <i class="bi bi-house-fill"></i>
+        </a>
+        <a (click)="setTab(4)" class="tab" [class.active]="activeTab === 3">
+          <i class="bi bi-pencil-square"></i>
+        </a>
+
+      </nav>
+    </div>
+    <div class="rightbox">
+      <div *ngIf="activeTab === 0" class="profile tabShow">
+        <h1><b>User Info</b></h1>
+
+        <p><strong>Full Name:</strong> {{ user.name }}</p>
+
+        <p><strong>E-mail:</strong> {{ user.email }}</p>
+
+        <p><strong>Contact:</strong> {{ user.contact }}</p>
+        
+      </div>
+    
+      <!-- <div class="rightbox"> -->
+      <div *ngIf="activeTab === 1" class="cart tabShow">
+        <h1><b>Hurry up and Buy your saved items</b></h1>
+        <button class="btn btn-success" routerLink="/cart">Go to cart</button>
+      <!-- </div> -->
+        <!-- Write the code of the cart here -->
+      </div>
+      <div *ngIf="activeTab === 2" class="bookmark tabShow">
+        <h1><b>Go to your Bookmarked remedies</b></h1>
+        <button class="btn btn-success" routerLink="/bookmark">Click Here</button>
+        <!-- Write the code of the bookmark here -->
+      </div>
+      <div *ngIf="activeTab === 3" class="address tabShow">
+        <h1><b>Saved Address</b></h1>
+        <div *ngIf="savedAddresses.length > 0; else noAddresses">
+          <h3>Saved Addresses</h3>
+          <ul>
+            <li *ngFor="let address of savedAddresses">
+              <strong>{{ address.street }}</strong>, {{ address.city }}, {{ address.country }}
+            </li>
+          </ul>
+        </div>
+      
+        <ng-template #noAddresses>
+          <p>No addresses saved. Please add one.</p>
+        </ng-template>
+        <a routerLink="/address"><i class="bi bi-pencil-square"></i>
+        
+        </a>
+    
+        <!-- Write the code of the address here -->
+      </div>
+    </div>
+    <div class="rightbox">
+      <div *ngIf="activeTab === 4" class="profile tabShow">
+        <h1><b>User Info</b></h1>
+        <p>Full Name</p>
+        <input type="text" class="input" [(ngModel)]="user.name" />
+        <p>E-mail</p>
+        <input type="email" class="input" [(ngModel)]="user.email" />
+        <p>Contact</p>
+        <input type="text" class="input" [(ngModel)]="user.contact" />
+        <p>Password</p>
+        <input type="password" class="input" [(ngModel)]="user.password" />
+        <div>
+          <button class="btn" (click)="updateUser()">Update</button>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</body>
+
+    
+ 

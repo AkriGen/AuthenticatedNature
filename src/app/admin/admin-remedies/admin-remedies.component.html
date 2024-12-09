@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <h2 class="text-center">Remedies Management</h2>
+  
+    <!-- Add Remedy Button -->
+    <div class="text-end mb-3">
+      <button class="btn btn-success" (click)="onAddRemedy()">Add Remedy</button>
+    </div>
+  
+    <!-- Remedies Table -->
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Remedy Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let remedy of remedies; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ remedy.name }}</td>
+          <td>{{ remedy.description }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-2" (click)="onEditRemedy(remedy)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="onDeleteRemedy(remedy.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
