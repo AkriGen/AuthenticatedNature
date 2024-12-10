@@ -60,10 +60,19 @@ const routes: Routes = [
   { path: 'admin-user-details', component: AdminUserDetailsComponent },
   { path: 'admin-management', component: AdminManagementComponent },
   { path: 'admin-profile', component: AdminProfileComponent },
-  {path:'address',component:AddressComponent}
-
-
+  {path:'address',component:AddressComponent},
+  { path: 'admin-panel', component: AdminPanelComponent },
+  { path: 'admin-product', component: AdminProductComponent },
+  { path: 'admin-remedies', component: AdminRemediesComponent },
+  { path: 'admin-health-tips', component: AdminHealthTipsComponent },
+  { path: 'admin-user-details', component: AdminUserDetailsComponent },
+  { path: 'admin-management', component: AdminManagementComponent },
+  { path: 'admin-profile', component: AdminProfileComponent },
 ];
+
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

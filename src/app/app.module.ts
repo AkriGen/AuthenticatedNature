@@ -44,6 +44,7 @@ import { PopupComponent } from './popup/popup.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {  HttpClient, HttpClientModule } from '@angular/common/http';
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
 }
@@ -93,10 +94,11 @@ export function tokenGetter() {
     MatListModule,
     FormsModule,
     CommonModule,
+    HttpClientModule, 
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5001"],
+        allowedDomains: ["localhost:7252"],
         disallowedRoutes: []
       }
     })

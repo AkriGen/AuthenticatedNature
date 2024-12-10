@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { AuthenticatedResponse } from '../../interfaces/authenticated-response';
+import { NgForm } from '@angular/forms';
+import { Login } from '../../interfaces/login';
+import { AutharizeService } from '../../services/autharize.service';
 
 @Component({
   selector: 'app-login',
@@ -11,30 +16,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  loginData = {
-    email: '',
-    password: ''
-  };
+  username: string = '';
+  password: string = '';
+  loginError: boolean = false; // Variable to track login errors
+  constructor(private authService: AutharizeService, private router: Router) {}
 
-  constructor(private userService: UserService, private router: Router) {}
-
-  login(): void {
-    const userAccount = localStorage.getItem('userAccount');
-    if (userAccount) {
-      const storedUser = JSON.parse(userAccount);
-      if (
-        this.loginData.email === storedUser.email &&
-        this.loginData.password === storedUser.password
-      ) {
-        this.userService.setUser(storedUser);
-        alert('Login successful!');
-        this.router.navigate(['/user']);
-      } else {
-        alert('Invalid email or password!');
+  login() {
+    this.authService.login(this.username, this.password).subscribe(
+      (response) => {
+        // Save JWT token to session
+        this.authService.setSession(response);
+        
+        // Redirect based on role (admin or user)
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/user']);
+        }
+      },
+      (error) => {
+        alert('Login failed!');
       }
-    } else {
-      alert('No account found. Please sign up first!');
-      this.router.navigate(['/signup']);
-    }
+    );
   }
 }

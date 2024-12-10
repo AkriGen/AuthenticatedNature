@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { User, UserService } from '../../admin-services/user.service';
 
 @Component({
   selector: 'app-admin-user-details',
@@ -7,18 +8,46 @@ import { Component } from '@angular/core';
   templateUrl: './admin-user-details.component.html',
   styleUrl: './admin-user-details.component.css'
 })
-export class AdminUserDetailsComponent {
+export class AdminUserDetailsComponent implements OnInit {
 
-  users = [
-    { UserID: 1, UserName: 'John Doe', Email: 'john@example.com' },
-    { UserID: 2, UserName: 'Jane Doe', Email: 'jane@example.com' },
-    { UserID: 3, UserName: 'Alice Smith', Email: 'alice@example.com' },
-    { UserID: 4, UserName: 'Bob Johnson', Email: 'bob@example.com' },
-  ];
+  users: User[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    // Fetch users when the component is initialized
+    this.loadUsers();
+  }
+
+  // Method to load users from the backend
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(
+      (data: User[]) => {
+        this.users = data;
+       
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
 
   // Handle user deletion
-  onDeleteUser(userID: number) {
-    this.users = this.users.filter((user) => user.UserID !== userID);
-    console.log('Deleted user with ID:', userID);
+  onDeleteUser(userId: number): void {
+  
+    
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(userId).subscribe(
+        () => {
+          // Remove the user from the list after successful deletion
+          this.users = this.users.filter((user) => user.UserId !== userId);
+          console.log('Deleted user with ID:', userId);
+        },
+        (error) => {
+          console.error('Error deleting user:', error);
+        }
+      );
+    }
   }
+  
 }

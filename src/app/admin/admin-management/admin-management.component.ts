@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 export class AdminManagementComponent {
 
   // Dummy data for admins
+  // Dummy data for admins
   admins = [
     { AdminID: 1, Username: 'admin1', Email: 'admin1@example.com' },
     { AdminID: 2, Username: 'admin2', Email: 'admin2@example.com' },

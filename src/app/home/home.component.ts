@@ -25,12 +25,26 @@ export class HomeComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private router:Router,
-    private userService:UserService
+    private userService:UserService,
+    private jwtHelper: JwtHelperService
     // private jwtHelper: JwtHelperService,
   ) {
     this.checkRemindTime();  // Check if the popup should be displayed based on the remind time
 
 
+  }
+  isUserAuthenticated = (): boolean => {
+    const token = localStorage.getItem("jwt");
+
+    if (token && !this.jwtHelper.isTokenExpired(token)){
+      return true;
+    }
+
+    return false;
+  }
+
+  logOut = () => {
+    localStorage.removeItem("jwt");
   }
   // Check if the popup should be shown based on "Remind Me Later" time
   checkRemindTime() {
