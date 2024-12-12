@@ -31,7 +31,7 @@ export class PopupComponent {
 
   // Redirect to the login page when the user clicks 'Go to Login'
   redirectToLogin() {
-    this.router.navigate(['login']);
+    this.router.navigate(['signup']);
   }
 
   

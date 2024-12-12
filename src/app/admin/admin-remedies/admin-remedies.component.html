@@ -1,41 +1,36 @@
 <div class="container mt-4">
-  <h2 class="text-center">Remedies Management</h2>
+  <!-- Remedies Management Heading -->
+  <h2 class="text-center remedy-heading">Remedies Management</h2>
 
   <!-- Add Remedy Button -->
   <div class="text-end mb-3">
       <button class="btn btn-success" (click)="onAddRemedy()">Add Remedy</button>
   </div>
 
-  <!-- Remedies Table -->
-  <table class="table table-bordered table-striped text-center">
-      <thead>
-          <tr>
-              <th>#</th>
-              <th>Remedy Name</th>
-              <th>Remedy Image</th>
-
-              <th>Description</th>
-              <th>Benefits</th>
-              <th>PreparationMethod</th>
-              <th>UsageInstructions</th>
-              <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let remedy of remedies; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ remedy.RemedyName }}</td>  
-              <td><img src="{{remedy.Remediesimg}}" width="100" height="100"></td> 
-
-              <td>{{ remedy.Description }}</td>
-              <td>{{remedy.Benefits}}</td> 
-              <td>{{remedy.PreparationMethod}}</td>
-              <td>{{remedy.UsageInstructions}}</td>
-              <td>
-                  <button class="btn btn-primary btn-sm me-2" (click)="onEditRemedy(remedy)">Edit</button>
-                  <button class="btn btn-danger btn-sm" (click)="onDeleteRemedy(remedy.RemedyId)">Delete</button>
-              </td>
-          </tr>
-      </tbody>
-  </table>
+  <!-- Remedies Cards -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let remedy of remedies; let i = index">
+      <div class="card remedy-card shadow-sm">
+        <img [src]="remedy.Remediesimg" class="card-img-top" alt="Remedy Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ remedy.RemedyName }}</h5>
+          <p class="card-text">{{ remedy.Description }}</p>
+          <ul class="list-unstyled">
+            <li><strong>Benefits:</strong> {{ remedy.Benefits }}</li>
+            <li><strong>Preparation:</strong> {{ remedy.PreparationMethod }}</li>
+            <li><strong>Usage:</strong> {{ remedy.UsageInstructions }}</li>
+          </ul>
+          <div class="d-flex justify-content-between mt-3">
+            <!-- Edit and Delete Icons -->
+            <button class="btn btn-outline-primary btn-sm" (click)="onEditRemedy(remedy)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="onDeleteRemedy(remedy.RemedyId)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

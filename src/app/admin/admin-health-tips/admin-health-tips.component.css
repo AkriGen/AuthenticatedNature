@@ -1,0 +1,120 @@
+/* Styling for Health Tip Management Heading */
+.health-tip-heading {
+    font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #cb9011, #25dcfc);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 1.5s ease-out;
+  font-size: 40px;
+  font-weight: bolder;
+    
+  }
+  
+
+  /* Styling for Health Tip Cards */
+  .health-tip-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 650px;
+  }
+  
+  .health-tip-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for card body content */
+  .health-tip-card .card-body {
+    padding: 1.5rem;
+  }
+  
+  .health-tip-card .card-body h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .health-tip-card .card-body p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .health-tip-card .card-body ul {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .health-tip-card .card-footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+  }
+  
+  .health-tip-card .card-footer button {
+    flex: 1;
+    margin: 0 5px;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    height: 40px;
+  }
+  
+ /* Small Screen (up to 576px) */
+@media (max-width: 576px) {
+    /* Adjust heading font size */
+    .health-tip-heading {
+      font-size: 1.5rem;
+    }
+   .health-tip-card{
+    height: 560px;
+   }
+    /* Adjust card text size and padding */
+    .health-tip-card .card-body h5 {
+      font-size: 1rem;
+    }
+  
+    .health-tip-card .card-body p {
+      font-size: 0.9rem;
+    }
+  
+    /* On small screens, change card layout to single column */
+    .row-cols-1 {
+      row-gap: 1.5rem;
+    }
+  
+    /* Adjust buttons to be more compact */
+    .health-tip-card .card-footer button {
+      font-size: 0.8rem;
+      padding: 0.4rem;
+    }
+  }
+  
+  /* Medium Screen (576px to 767px) */
+  @media (min-width: 576px) and (max-width: 767px) {
+    /* Adjust heading font size */
+    .health-tip-heading {
+      font-size: 1.7rem;
+    }
+  
+    /* On medium screens, use two columns */
+    .row-cols-md-2 {
+      row-gap: 1.5rem;
+    }
+  
+    /* Adjust buttons size */
+    .health-tip-card .card-footer button {
+      font-size: 0.85rem;
+      padding: 0.45rem;
+    }
+  }
+  
+  /* Large Screen (992px and above) */
+  @media (min-width: 992px) {
+    /* On larger screens, use three columns */
+    .row-cols-lg-3 {
+      row-gap: 1.5rem;
+    }
+  }

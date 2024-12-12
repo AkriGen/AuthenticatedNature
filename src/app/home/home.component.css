@@ -82,6 +82,7 @@ body {
 }
 .colpro{
   box-shadow: 2px 2px  rgb(207, 196, 196);
+  height: 480px ;
   
 }
 .colpro:hover{
@@ -241,6 +242,7 @@ body {
     width: 100%;
     
   }
+ 
 
   .btn {
     width: auto; /* Adjust button width for small screens */

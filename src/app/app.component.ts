@@ -10,7 +10,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   title = 'NatureNew';
   showNav: boolean = true;
-  excludedRoutes: string[] = ['/login', '/signup']; // Add paths where you don't want nav
+  excludedRoutes: string[] = ['/login', '/signup','/admin-panel','/admin-product','/admin-remedies','/admin-management','/admin-health-tips','/admin-user-management']; // Add paths where you don't want nav
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {

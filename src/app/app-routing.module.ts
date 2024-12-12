@@ -29,6 +29,7 @@ import { AdminUserDetailsComponent } from './admin/admin-user-details/admin-user
 import { AdminManagementComponent } from './admin/admin-management/admin-management.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { AuthGuard } from './auth.guard';
+import { UserloginComponent } from './auth/userlogin/userlogin.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -36,8 +37,9 @@ const routes: Routes = [
   {path:'footer',component:FooterComponent},
   {path:'signup',component:SignupComponent},
   {path:'login',component:LoginComponent},
+  {path:'userlogin',component:UserloginComponent},
   {path:'aboutus',component:AboutusComponent},
-  {path:'bookmark',component:BookmarkComponent,canActivate: [AuthGuard]},
+  {path:'bookmark',component:BookmarkComponent,canActivate: [AuthGuard] },
   {path:'cart',component:CartComponent,canActivate: [AuthGuard]},
   {path:'contactus',component:ContactusComponent,canActivate: [AuthGuard]},
   {path:'payment',component:PaymentComponent,canActivate: [AuthGuard]},
@@ -53,21 +55,15 @@ const routes: Routes = [
   {path:'immunity',component:ImmunityComponent,canActivate: [AuthGuard]},
   {path:'digestion',component:DigestionComponent,canActivate: [AuthGuard]},
   { path: '', redirectTo: '/admin-panel', pathMatch: 'full' },
-  { path: 'admin-panel', component: AdminPanelComponent },
-  { path: 'admin-product', component: AdminProductComponent },
-  { path: 'admin-remedies', component: AdminRemediesComponent },
-  { path: 'admin-health-tips', component: AdminHealthTipsComponent },
-  { path: 'admin-user-details', component: AdminUserDetailsComponent },
-  { path: 'admin-management', component: AdminManagementComponent },
-  { path: 'admin-profile', component: AdminProfileComponent },
+  { path: 'admin-panel', component: AdminPanelComponent ,canActivate: [AuthGuard], data: { role: 'admin' }  },  // Specify role if needed (e.g., admin)},
+  { path: 'admin-product', component: AdminProductComponent,canActivate: [AuthGuard], data: { role: 'admin' } },
+  { path: 'admin-remedies', component: AdminRemediesComponent,canActivate: [AuthGuard], data: { role: 'admin' } },
+  { path: 'admin-health-tips', component: AdminHealthTipsComponent ,canActivate: [AuthGuard], data: { role: 'admin' }},
+  { path: 'admin-user-details', component: AdminUserDetailsComponent ,canActivate: [AuthGuard], data: { role: 'admin' }},
+  { path: 'admin-management', component: AdminManagementComponent ,canActivate: [AuthGuard], data: { role: 'admin' }},
+  { path: 'admin-profile', component: AdminProfileComponent,canActivate: [AuthGuard], data: { role: 'admin' } },
   {path:'address',component:AddressComponent},
-  { path: 'admin-panel', component: AdminPanelComponent },
-  { path: 'admin-product', component: AdminProductComponent },
-  { path: 'admin-remedies', component: AdminRemediesComponent },
-  { path: 'admin-health-tips', component: AdminHealthTipsComponent },
-  { path: 'admin-user-details', component: AdminUserDetailsComponent },
-  { path: 'admin-management', component: AdminManagementComponent },
-  { path: 'admin-profile', component: AdminProfileComponent },
+ 
 ];
 
 

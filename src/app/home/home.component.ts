@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   }
   isUserAuthenticated = (): boolean => {
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
 
     if (token && !this.jwtHelper.isTokenExpired(token)){
       return true;
@@ -49,8 +49,8 @@ export class HomeComponent implements OnInit {
   // Check if the popup should be shown based on "Remind Me Later" time
   checkRemindTime() {
     // Skip popup if user is logged in
-    const user = this.userService.getUser();
-    if (user && user.isAuthenticated) {
+    const user = this.userService.getStoredUserData() ;
+    if (user && user.username) {
       this.showPopup = false;
       return;  // Skip further logic if logged in
     }
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
      // Show the popup after 20 seconds, only if the user is not authenticated
-     const user = this.userService.getUser();
+     const user = this.userService.getStoredUserData();
      this.isLoggedIn = user && user.email ? true : false;
      
      

@@ -12,7 +12,7 @@ export interface User {
 })
 export class UserService {
 
-  private apiUrl = 'https://localhost:44348/api/Users'; // Replace with your API URL
+  private apiUrl = 'https://localhost:5000/api/Users'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class UserService {
 
   // Method to delete a user
  deleteUser(id: number): Observable<any> {
-  const url = `https://localhost:44348/api/Users/${id}`;
+  const url = `https://localhost:5000/api/Users/${id}`;
   
   return this.http.delete(url);
 }

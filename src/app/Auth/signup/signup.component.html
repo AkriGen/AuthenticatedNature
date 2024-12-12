@@ -1,79 +1,92 @@
 <div class="signup-container">
   <h2>Sign Up</h2>
-
-  <!-- Registration Form -->
-  <form [formGroup]="signupForm" (ngSubmit)="register()">
-    <!-- Username Field -->
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <!-- Username -->
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="userName">Username</label>
       <input
-        id="username"
-        class="form-control"
-        formControlName="username"
+        id="userName"
+        formControlName="userName"
         type="text"
         placeholder="Enter your username"
+        class="form-control"
+        required
       />
-      <div *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.invalid" class="text-danger">
-        Username is required.
+      <div *ngIf="signupForm.get('userName')?.invalid && signupForm.get('userName')?.touched" class="error">
+        Username is required and must be at least 3 characters.
       </div>
     </div>
 
-    <!-- Email Field -->
+    <!-- Email -->
     <div class="form-group">
       <label for="email">Email</label>
       <input
         id="email"
-        class="form-control"
         formControlName="email"
         type="email"
         placeholder="Enter your email"
-      />
-      <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="text-danger">
-        A valid email is required.
-      </div>
-    </div>
-
-    <!-- Contact Field -->
-    <div class="form-group">
-      <label for="contact">Contact</label>
-      <input
-        id="contact"
         class="form-control"
-        formControlName="contact"
-        type="text"
-        placeholder="Enter your contact number"
+        required
       />
-      <div *ngIf="signupForm.get('contact')?.touched && signupForm.get('contact')?.invalid" class="text-danger">
-        Contact number is required.
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error">
+        Please enter a valid email address.
       </div>
     </div>
 
-    <!-- Password Field -->
+    <!-- Password -->
     <div class="form-group">
       <label for="password">Password</label>
       <input
         id="password"
-        class="form-control"
         formControlName="password"
         type="password"
         placeholder="Enter your password"
+        class="form-control"
+        required
       />
-      <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="text-danger">
-        Password is required (at least 6 characters).
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error">
+        Password must be at least 6 characters long.
       </div>
     </div>
 
+    <!-- Confirm Password -->
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        type="password"
+        placeholder="Confirm your password"
+        class="form-control"
+        required
+      />
+      <div *ngIf="signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched" class="error">
+        Passwords do not match.
+      </div>
+    </div>
+
+    <!-- Profile Image -->
+    <div class="form-group">
+      <label for="userImage">Profile Image</label>
+      <input
+        id="userImage"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="form-control"
+      />
+    </div>
+
+    <!-- Error Messages -->
+    <div *ngIf="validationErrors.length > 0" class="error-messages">
+      <ul>
+        <li *ngFor="let error of validationErrors">{{ error }}</li>
+      </ul>
+    </div>
+
     <!-- Submit Button -->
-    <button type="submit" class="btn" [disabled]="signupForm.invalid">Sign Up</button>
+    <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary">Sign Up</button>
+    <div routerLink="/login" class="text-center text-danger">Adimin login>>></div>
+    <div routerLink="/userlogin" class="text-center text-success">UserLogin>>>>></div>
   </form>
-
-  <!-- Error Message for Registration Failure -->
-  <div *ngIf="registrationError" class="alert alert-danger mt-3">
-    Registration failed. Please try again.
-  </div>
-
-  <!-- Link to Login -->
-  <div class="mt-3">
-    <p>Already have an account? <a routerLink="/login">Login here</a></p>
-  </div>
 </div>

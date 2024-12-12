@@ -15,23 +15,27 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const currentUser = this.authService.currentUserValue;
-    const isAdmin = this.authService.isAdmin();
 
-    // If not logged in, redirect to login
-    if (!currentUser) {
+    const token = sessionStorage.getItem('authToken');
+    
+    // Check if the user is authenticated
+    if (!token) {
       this.router.navigate(['/login']);
+      return false; // Deny access if not authenticated
+    }
+
+    // Optionally, check user role based on route data
+    const expectedRole = route.data['role'];
+    const currentRole = this.authService.getRole();
+
+    if (expectedRole && currentRole !== expectedRole) {
+      this.router.navigate(['/unauthorized']);  // Redirect to unauthorized page if role doesn't match
       return false;
     }
 
-    // If the route requires admin, and the user is not an admin, redirect to a different page
-    if (route.data['role'] === 'admin' && !isAdmin) {
-      this.router.navigate(['/home']); // Redirect to home or any non-admin page
-      return false;
-    }
-
-    return true;
+    return true; // Allow access if authenticated and role matches (if required)
   }
+}
   // constructor(private router: Router, private userService: UserService) {}
 
   // canActivate(
@@ -51,4 +55,4 @@ export class AuthGuard implements CanActivate {
   //   return false;
   // }
   
-}
+

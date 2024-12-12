@@ -1,12 +1,162 @@
-.container {
-  max-width: 900px;
-  margin: auto;
+/* Product Management Heading */
+.product-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #cb9011, #25dcfc);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 1.5s ease-out;
+  font-size: 40px;
+  font-weight: bolder;
 }
 
-thead {
-  background-color: #f8f9fa;
+/* Basic Card Styles */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-sm {
-  padding: 5px 10px;
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #666;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.category-id {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+button {
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Edit and Delete Button Icons */
+.btn-outline-primary, .btn-outline-danger {
+  display: flex;
+  align-items: center;
+}
+
+.btn-outline-primary i, .btn-outline-danger i {
+  margin-right: 5px;
+}
+
+/* Media Query for Small Screens (Portrait Phones, <= 576px) */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .card-img-top {
+    height: 150px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .category-id {
+    font-size: 0.8rem;
+  }
+
+  .row-cols-1 .col {
+    padding: 5px;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Media Query for Medium Screens (Tablets, >= 576px and < 992px) */
+@media (min-width: 576px) and (max-width: 991px) {
+  .card-img-top {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .price {
+    font-size: 1.05rem;
+  }
+
+  .category-id {
+    font-size: 0.9rem;
+  }
+
+  .row-cols-md-2 .col {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+}
+
+/* Media Query for Large Screens (Desktops, >= 992px) */
+@media (min-width: 992px) {
+  .row-cols-lg-3 .col {
+    padding: 20px;
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+
+  .category-id {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+  }
 }

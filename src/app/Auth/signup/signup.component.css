@@ -1,38 +1,57 @@
-.login-container,
 .signup-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 8px;
   background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.login-container h1,
-.signup-container h1 {
+.signup-container h2 {
   text-align: center;
-  margin-bottom: 20px;
+  color: #333;
 }
 
-input {
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
   width: 100%;
   padding: 10px;
-  margin: 8px 0;
-  box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-button {
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.error-messages ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  color: red;
+}
+
+.btn-primary {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background: #007bff;
   border: none;
+  color: white;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #45a049;
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

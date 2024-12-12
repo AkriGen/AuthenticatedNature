@@ -1,91 +1,80 @@
-<body>
-  <div class="container">
-    <div class="leftbox">
-      <nav>
-        <a (click)="setTab(0)" class="tab" [class.active]="activeTab === 0">
-          <i class="bi bi-person-circle"></i>
-        </a>
-        <a (click)="setTab(1)" class="tab" [class.active]="activeTab === 1">
-          <i class="bi bi-cart-fill"></i>
-        </a>
-        <a (click)="setTab(2)" class="tab" [class.active]="activeTab === 2">
-          <i class="bi bi-bookmarks-fill"></i>
-        </a>
-        <a (click)="setTab(3)" class="tab" [class.active]="activeTab === 3">
-          <i class="bi bi-house-fill"></i>
-        </a>
-        <a (click)="setTab(4)" class="tab" [class.active]="activeTab === 3">
-          <i class="bi bi-pencil-square"></i>
-        </a>
-
-      </nav>
-    </div>
-    <div class="rightbox">
-      <div *ngIf="activeTab === 0" class="profile tabShow">
-        <h1><b>User Info</b></h1>
-
-        <p><strong>Full Name:</strong> {{ user.name }}</p>
-
-        <p><strong>E-mail:</strong> {{ user.email }}</p>
-
-        <p><strong>Contact:</strong> {{ user.contact }}</p>
-        
-      </div>
-    
-      <!-- <div class="rightbox"> -->
-      <div *ngIf="activeTab === 1" class="cart tabShow">
-        <h1><b>Hurry up and Buy your saved items</b></h1>
-        <button class="btn btn-success" routerLink="/cart">Go to cart</button>
-      <!-- </div> -->
-        <!-- Write the code of the cart here -->
-      </div>
-      <div *ngIf="activeTab === 2" class="bookmark tabShow">
-        <h1><b>Go to your Bookmarked remedies</b></h1>
-        <button class="btn btn-success" routerLink="/bookmark">Click Here</button>
-        <!-- Write the code of the bookmark here -->
-      </div>
-      <div *ngIf="activeTab === 3" class="address tabShow">
-        <h1><b>Saved Address</b></h1>
-        <div *ngIf="savedAddresses.length > 0; else noAddresses">
-          <h3>Saved Addresses</h3>
-          <ul>
-            <li *ngFor="let address of savedAddresses">
-              <strong>{{ address.street }}</strong>, {{ address.city }}, {{ address.country }}
-            </li>
-          </ul>
-        </div>
-      
-        <ng-template #noAddresses>
-          <p>No addresses saved. Please add one.</p>
-        </ng-template>
-        <a routerLink="/address"><i class="bi bi-pencil-square"></i>
-        
-        </a>
-    
-        <!-- Write the code of the address here -->
-      </div>
-    </div>
-    <div class="rightbox">
-      <div *ngIf="activeTab === 4" class="profile tabShow">
-        <h1><b>User Info</b></h1>
-        <p>Full Name</p>
-        <input type="text" class="input" [(ngModel)]="user.name" />
-        <p>E-mail</p>
-        <input type="email" class="input" [(ngModel)]="user.email" />
-        <p>Contact</p>
-        <input type="text" class="input" [(ngModel)]="user.contact" />
-        <p>Password</p>
-        <input type="password" class="input" [(ngModel)]="user.password" />
-        <div>
-          <button class="btn" (click)="updateUser()">Update</button>
-
-        </div>
-      </div>
-      
-    </div>
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 class="sidebar-title">User Dashboard</h2>
+    <ul class="sidebar-nav">
+      <li [class.active]="activeTab === 0" (click)="setTab(0)">Profile</li>
+      <li [class.active]="activeTab === 1" (click)="setTab(1)">Saved Addresses</li>
+      <li (click)="logout()">Logout</li>
+    </ul>
   </div>
 
-</body>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1 class="animated-heading">Welcome, {{ user?.userName }}</h1>
 
+    <!-- Profile Tab -->
+    <div *ngIf="activeTab === 0 && isEditing; else displayProfile" class="tab-content">
+      <form (ngSubmit)="updateUserProfile()">
+        <div>
+          <label for="userName">Username</label>
+          <input type="text" [(ngModel)]="userProfile.userName" name="userName" required />
+        </div>
+  
+        <div>
+          <label for="email">Email</label>
+          <input type="email" [(ngModel)]="userProfile.email" name="email" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="userImage">Profile Image</label>
+          <input
+            id="userImage"
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            class="form-control"
+          />
+        </div>
     
- 
+  
+        <button type="submit">Update Profile</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+    <!-- Profile Display -->
+  <ng-template #displayProfile>
+    <p><strong>Username:</strong> {{ user?.userName }}</p>
+    <p><strong>Email:</strong> {{ userProfile?.email }}</p>
+    <p><strong>User Image:</strong> <img [src]="userProfile?.userImage" alt="User Image" width="50" height="50"></p>
+
+    <button (click)="startEditing()">Edit Profile</button>
+  </ng-template>
+      <!-- Edit Profile
+      <button *ngIf="!isEditMode" (click)="toggleEditMode()" class="edit-button">Edit Profile</button>
+      <form *ngIf="isEditMode" class="edit-form" (ngSubmit)="updateUser()">
+        <label for="userName">Name</label>
+        <input type="text" id="userName" [(ngModel)]="user.userName" name="userName" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required />
+
+        <label for="userImage">Profile Image</label>
+        <input type="file" id="userImage" (change)="onFileChange($event)" />
+
+        <button type="submit" class="save-button">Save Changes</button>
+        <button type="button" (click)="toggleEditMode()" class="cancel-button">Cancel</button>
+      </form>
+    </div> -->
+
+    <!-- Saved Addresses Tab -->
+    <div *ngIf="activeTab === 1" class="tab-content">
+      <h2>Saved Addresses</h2>
+      <ul>
+        <!-- <li *ngFor="let address of savedAddresses">
+          {{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.country }}
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</div>

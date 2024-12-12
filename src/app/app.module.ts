@@ -24,7 +24,7 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { HelthtipsComponent } from './helthtips/helthtips.component';
 import { PaymentComponent } from './payment/payment.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddressComponent } from './address/address.component';
 import { CancellationComponent } from './cancellation/cancellation.component';
@@ -45,6 +45,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {  HttpClient, HttpClientModule } from '@angular/common/http';
+import { UserloginComponent } from './auth/userlogin/userlogin.component';
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
 }
@@ -80,7 +81,8 @@ export function tokenGetter() {
     AdminRemediesComponent,
     AdminUserDetailsComponent,
     AddressComponent,
-    PopupComponent
+    PopupComponent,
+    UserloginComponent
     ],
   imports: [
     BrowserModule,
@@ -91,6 +93,7 @@ export function tokenGetter() {
     MatToolbarModule,  
     MatIconModule,
     MatSidenavModule,
+    ReactiveFormsModule,
     MatListModule,
     FormsModule,
     CommonModule,

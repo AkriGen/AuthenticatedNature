@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AutharizeService } from '../../services/autharize.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,6 +10,8 @@ import { Component } from '@angular/core';
   styleUrl: './admin-panel.component.css'
 })
 export class AdminPanelComponent {
+  constructor(private authService: AutharizeService, private router: Router) {}
+
 
   // Sample data
   totalProduct = 40;
@@ -33,5 +37,9 @@ export class AdminPanelComponent {
 
   onCreateAdminClick() {
     console.log('Navigating to Create Admin page...');
+  }
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirect to login page
   }
 }

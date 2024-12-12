@@ -15,13 +15,13 @@ export class NavComponent implements OnInit{
   constructor(private userService: UserService, private router: Router) {}
   ngOnInit(): void {
     // Check if the user is logged in by getting the user data
-    const currentUser = this.userService.getUser();
+    const currentUser = this.userService.getStoredUserData();
     this.isLoggedIn = currentUser && currentUser.email ? true : false;
   }
 
   // Log the user out
   logout(): void {
-    this.userService.logout();  // This clears the user data
+    this.userService.clearUserData;  // This clears the user data
     this.isLoggedIn = false;  // Update the UI
     this.router.navigate(['/']);  // Redirect to the home page after logout
   }
