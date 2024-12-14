@@ -4,14 +4,11 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
-  standalone: false,
-  
   templateUrl: './admin-panel.component.html',
-  styleUrl: './admin-panel.component.css'
+  styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent {
   constructor(private authService: AutharizeService, private router: Router) {}
-
 
   // Sample data
   totalProduct = 40;

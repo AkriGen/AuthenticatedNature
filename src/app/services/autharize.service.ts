@@ -11,11 +11,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AutharizeService {
 
-
-  private apiUrlAdmin = 'http://localhost:5000/api/Auth/adminlogin';  // Admin login API URL
-  private apiUrlUser = 'http://localhost:5000/api/Auth/userlogin';  // User login API URL
-  private apiUrlSignup = 'http://localhost:5000/api/Auth/signup';  // User signup API URL
-  private apiUrlProfile = 'http://localhost:5000/api/Users'; // Get user profile data API URL
+  private apiUrlAdmin = 'https://localhost:44348/api/Auth/adminlogin';  // Admin login API URL
+  private apiUrlUser = 'https://localhost:44348/api/Auth/userlogin';  // User login API URL
+  private apiUrlSignup = 'https://localhost:44348/api/Auth/signup';  // User signup API URL
+  private apiUrlProfile = 'https://localhost:44348/api/Users'; // Get user profile data API URL
 
   constructor(
     private http: HttpClient,

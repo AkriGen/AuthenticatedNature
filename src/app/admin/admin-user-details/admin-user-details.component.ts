@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { User, UserService } from '../../admin-services/user.service';
 
 @Component({
   selector: 'app-admin-user-details',
-  standalone: false,
-  
   templateUrl: './admin-user-details.component.html',
-  styleUrl: './admin-user-details.component.css'
+  imports:[CommonModule],
+  styleUrls: ['./admin-user-details.component.css'],
 })
 export class AdminUserDetailsComponent implements OnInit {
-
   users: User[] = [];
 
   constructor(private userService: UserService) {}

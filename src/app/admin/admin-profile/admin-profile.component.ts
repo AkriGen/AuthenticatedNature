@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AdminProfile, AdminService } from '../../admin-services/admin.service';
 
 @Component({
   selector: 'app-admin-profile',
-  standalone: false,
-  
   templateUrl: './admin-profile.component.html',
-  styleUrl: './admin-profile.component.css'
+  imports: [CommonModule, FormsModule],
+  styleUrls: ['./admin-profile.component.css']
 })
-export class AdminProfileComponent {
-
+export class AdminProfileComponent implements OnInit {
   currentAdmin: AdminProfile = {
     AdminId: 0,
     Username: '',
@@ -32,7 +32,7 @@ export class AdminProfileComponent {
     this.adminService.getAdminProfile().subscribe(
       (data) => {
         this.currentAdmin = data; 
-        console.log(data) // Assign fetched data to currentAdmin
+     
       },
       (error) => {
         console.error('Error loading admin profile:', error);
@@ -41,6 +41,7 @@ export class AdminProfileComponent {
   }
 
   saveProfile(): void {
+    // Call the update API to save the profile (including password)
     this.adminService.updateAdminProfile(this.currentAdmin).subscribe(
       (response) => {
         console.log('Admin profile updated:', response);
@@ -51,5 +52,15 @@ export class AdminProfileComponent {
         alert('Error updating profile.');
       }
     );
+  }
+
+  // Function to handle password change, if necessary
+  changePassword(newPassword: string): void {
+    if (newPassword && newPassword.length >= 8) {
+      this.currentAdmin.Password = newPassword;
+      this.saveProfile();  // Save the updated profile
+    } else {
+      alert('Password must be at least 8 characters long');
+    }
   }
 }

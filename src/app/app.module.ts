@@ -33,13 +33,7 @@ import { HairComponent } from './category/hair/hair.component';
 import { BodyComponent } from './category/body/body.component';
 import { ImmunityComponent } from './category/immunity/immunity.component';
 import { DigestionComponent } from './category/digestion/digestion.component';
-import { AdminHealthTipsComponent } from './admin/admin-health-tips/admin-health-tips.component';
-import { AdminManagementComponent } from './admin/admin-management/admin-management.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
-import { AdminProductComponent } from './admin/admin-product/admin-product.component';
-import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
-import { AdminRemediesComponent } from './admin/admin-remedies/admin-remedies.component';
-import { AdminUserDetailsComponent } from './admin/admin-user-details/admin-user-details.component';
+
 import { PopupComponent } from './popup/popup.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth.guard';
@@ -73,13 +67,6 @@ export function tokenGetter() {
     BodyComponent,
     ImmunityComponent,
     DigestionComponent,
-    AdminHealthTipsComponent,
-    AdminManagementComponent,
-    AdminPanelComponent,
-    AdminProductComponent,
-    AdminProfileComponent,
-    AdminRemediesComponent,
-    AdminUserDetailsComponent,
     AddressComponent,
     PopupComponent,
     UserloginComponent

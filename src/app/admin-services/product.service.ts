@@ -1,45 +1,58 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// Define the Product interface
-export interface Product {
-  ProductId: number;
-  ProductName: string;
-  Productimg: string;
-  Price: number;
-  Description: string;
-  StockQuantity: number;
-  CategoryId: number;
-  CreatedByAdminId: number;
-}
+import { CreateProductDTO, UpdateProductDTO, ReadProductDTO, DeleteProductDTO } from '../models/product-dto.Model';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  private apiUrl = 'https://localhost:44348/api/Product'; // Replace with your actual API URL
 
-  // Replace with your actual API endpoint
-  private apiUrl = 'http://localhost:5000/api/Product';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  // Method to fetch all products
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+  // Method to get all products
+  getProducts(): Observable<ReadProductDTO[]> {
+    return this.http.get<ReadProductDTO[]>(this.apiUrl);
   }
 
-  // Method to add a product
-  addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+  // Method to get a single product by ID
+  getProductById(id: number): Observable<ReadProductDTO> {
+    return this.http.get<ReadProductDTO>(`${this.apiUrl}/${id}`);
   }
 
-  // Method to update a product
-  updateProduct(id: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, product);
+  // Method to create a new product
+  addProduct(createProductDTO: CreateProductDTO): Observable<ReadProductDTO> {
+    const formData = new FormData();
+    formData.append('ProductName', createProductDTO.ProductName); // Ensure correct naming convention
+    formData.append('Price', createProductDTO.Price.toString());
+    formData.append('Description', createProductDTO.Description);
+    formData.append('StockQuantity', createProductDTO.StockQuantity.toString());
+    formData.append('CategoryId', createProductDTO.CategoryId.toString());
+    formData.append('File', createProductDTO.ProductImage); // Append the image file correctly
+   
+    return this.http.post<ReadProductDTO>(this.apiUrl, formData);
+  }
+
+  // Method to update an existing product
+  updateProduct(updateProductDTO: UpdateProductDTO): Observable<ReadProductDTO> {
+    const formData = new FormData();
+    formData.append('ProductName', updateProductDTO.ProductName); // Ensure correct naming convention
+    formData.append('Price', updateProductDTO.Price.toString());
+    formData.append('Description', updateProductDTO.Description);
+    formData.append('StockQuantity', updateProductDTO.StockQuantity.toString());
+    formData.append('CategoryId', updateProductDTO.CategoryId.toString());
+
+    // If a new product image is provided, append it
+    if (updateProductDTO.ProductImage) {
+      formData.append('File', updateProductDTO.ProductImage); // Append new image correctly
+    }
+
+    return this.http.put<ReadProductDTO>(`${this.apiUrl}/${updateProductDTO.ProductId}`, formData);
   }
 
   // Method to delete a product
-  deleteProduct(id: number): Observable<void> {
-    console.log(id)
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteProduct(productId: number): Observable<DeleteProductDTO> {
+    return this.http.delete<DeleteProductDTO>(`${this.apiUrl}/${productId}`);
   }
 }
